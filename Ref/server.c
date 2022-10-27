@@ -45,10 +45,18 @@ int main(int argc, char **argv)
         */
         serv_sock = socket(PF_INET, SOCK_STREAM, 0);    /* 서버 소켓 생성 */
         if(serv_sock == -1)
-
                 error_handling("socket() error");
-
+	    printf("serv-sock : %d" , serv_sock);
         memset(&serv_addr, 0, sizeof(serv_addr));
+        /*
+            memset 메모리를 특정 값으로 세팅 
+            void* memset(void* ptr,int value,size_t num);
+            void* ptr : 세팅 하고자 하는 메모리 주소 
+            value : 메모리에 세팅하고자 하는 값 
+            size_t num 
+
+            memset이 성공하면 ptr을 반환하고 실패하면 NULL을 반환
+        */
         serv_addr.sin_family = AF_INET;
         serv_addr.sin_addr.s_addr = htonl(INADDR_ANY);
         serv_addr.sin_port = htons(atoi(argv[1]));
