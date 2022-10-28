@@ -58,7 +58,8 @@ int main(int argc, char **argv)
             memset이 성공하면 ptr을 반환하고 실패하면 NULL을 반환
         */
         serv_addr.sin_family = AF_INET;
-        serv_addr.sin_addr.s_addr = htonl(INADDR_ANY);
+        serv_addr.sin_addr.s_addr = htonl(INADDR_ANY);  // htonl 
+        printf("byte %d ", htonl(INADDR_ANY));
         serv_addr.sin_port = htons(atoi(argv[1]));
 
 
