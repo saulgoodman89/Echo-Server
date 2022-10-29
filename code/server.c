@@ -78,6 +78,8 @@ int main() {
 	*/
 	if(listen(server_sock, 5) == -1)  /* 연결 요청 대기 상태로 진입 */
 			error_handling("listen() error");
+	else 
+			puts("서버 동작 중 . . . . .  ");
 
 	client_addr_size = sizeof(client_addr);		//client 주소 크기 초기화 
 
@@ -105,8 +107,8 @@ int main() {
 						ssize_t : signed int 
 
 					*/
-                  	write(client_sock, message, str_len);
-                    write(1, message, str_len);		//1이 어떤 의미인지 확인 필요
+                  	write(client_sock, message, str_len); 
+					printf("클라이언트에 전달 받은 메시지 : %s",message);
 	}
 
 	close(client_sock);       /* 연결 종료 */

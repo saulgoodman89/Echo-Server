@@ -5,6 +5,7 @@
 #include <arpa/inet.h>
 #include <sys/types.h>
 #include <sys/socket.h>
+#include <ctype.h>
 
 #define BUFFER_SIZE 1024
 const char* PORT = "9180";
@@ -20,11 +21,19 @@ int main() {
     
 
     printf("IP 주소를 입력하세요 : ");
-    scanf("%s :", ipaddr);
+
+    /*
+        scanf("%s",ipaddr) 시 키를 입력 후 enter를 해야 다음 과정으로 넘어가는 문제점 확인 
+        %[^\n]%*c 
+        개행문자를 제외한 모든 문자를 읽어들이는 서식    
+        ^\n : 개행 문자를 제외 
+
+    */
+    scanf("%[^\n]%*c", ipaddr);
+
 
 
     sock = socket(PF_INET, SOCK_STREAM, 0);   /* 서버 접속을 위한 소켓 생성 */
-
     if(sock == -1)
             error_handling("socket() error");
 
@@ -40,6 +49,9 @@ int main() {
     */
     if( connect(sock, (struct sockaddr*)&server_addr, sizeof(server_addr)) == -1) 
             error_handling("connect() error");
+    else 
+            puts("서버와 연결 완료");
+
 
     while(1) {
         /* 메시지 입력 전송*/
