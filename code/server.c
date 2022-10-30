@@ -7,7 +7,6 @@
 #include <sys/socket.h>
 
 #define BUFFER_SIZE 1024
-//#define PORT 9180 
 
 void error_handling(char *message);
 const char* PORT = "9180";
@@ -26,11 +25,24 @@ int main() {
     	char			sin_zero[8];	//사용되지 않음
 		}
 
+
+		struct  in_addr {
+			u_long  s_addr;     // 32비트 IP 주소를 저장 할 구조체, network byte order
+		};
+
 	*/
 	struct sockaddr_in server_addr;
 	struct sockaddr_in client_addr;
 	
-
+	/*
+		int socket(int domain, int type, int protocol);
+		PF_INET // IPV4
+		
+		SOCKET_STREAM : tcp 
+		SOCKET_DGRAM : udp
+		SOCKET_RAW : raw 
+	*/
+	
 	server_sock = socket(PF_INET , SOCK_STREAM , 0);
 	
 	if(server_sock==-1) {
@@ -62,8 +74,6 @@ int main() {
 		성공시 0 , 실패시 -1 리턴 
 		int bind (int __fd, __CONST_SOCKADDR_ARG __addr, socklen_t __len) (소켓의 파일 디스크립터 , 주소 정보 할당 , __addr 구조체의 크기)
 
-		파일 디스크립터 : OS가 파일이나 소켓에 할당한 정수 
-		리눅스에서 사용하는 표준 입출력은 파일 디스크립터 값이 할당되어 있다. 
 
 	*/
 	if(bind(server_sock,(struct sockaddr*)&server_addr, sizeof(server_addr)) == -1) {
@@ -84,7 +94,7 @@ int main() {
 	client_addr_size = sizeof(client_addr);		//client 주소 크기 초기화 
 
 	
-	/*
+	/*	연결 요청 수락 
 		int accept(int sockfd, struct sockaddr *restrict addr,socklen_t *restrict addrlen); (소켓의 fd , 서버 주소 정보에 대한 포인터 , 서버주소 정보 포인터가 가르키는 구조체 크기)
 
 	*/
