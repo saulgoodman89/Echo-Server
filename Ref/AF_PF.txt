@@ -1,0 +1,5 @@
+AE(Address Family)
+소켓을 만들 때 얻너 주소체계를 사용하여 통신할지 정한다. 
+
+PF(Protocol Family)
+소켓을 만들 때 어떤 프로토콜을 사용해 통신할지 정한다. 

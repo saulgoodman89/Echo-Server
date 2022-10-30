@@ -58,6 +58,7 @@ int main() {
 	*/
 	server_addr.sin_addr.s_addr = htonl(INADDR_ANY);
 	
+	
 	/*
 		host byte order 데이터를 network byte order로 변경
 		neywork byte order는 big endian이다. 
