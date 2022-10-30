@@ -1,0 +1,23 @@
+파일 디스크립터란 ?
+- 시스템으로 부터 할당받은 파일을 가르키는 0이 아닌 정수 값. 
+- 유닉스 시스템에서는 프로세스가 이 파일들에 접근 할 때 FileDescriptor 개념을 이용한다. 
+- 파일 디스크립터는 0이 아닌 정수값이다. 
+- 프로세스가 실행중인 파일을 open 하면 커널은 해당 프로세스의 파일 디스크립터 숫자 중 사용하지 않는 가장 작은 값을 할당한다. 
+- 표준 입력(stdin / 0) / 표준 출력(stdout / 1) / 표준 에러(stderr / 2)
+
+./server의 FileDescriptor
+
+
+lsof -p 7479  
+-p : PID에 해당하는 파일 목록 확인 
+COMMAND  PID USER   FD   TYPE DEVICE SIZE/OFF     NODE NAME
+server  7479  keg  cwd    DIR   8,18     4096 15335822 /home/keg/dev/Echo-Server/code
+server  7479  keg  rtd    DIR   8,18     4096        2 /
+server  7479  keg  txt    REG   8,18    17496 15335824 /home/keg/dev/Echo-Server/code/server
+server  7479  keg  mem    REG   8,18  2029592 18614482 /usr/lib/x86_64-linux-gnu/libc-2.31.so
+server  7479  keg  mem    REG   8,18   191504 18614478 /usr/lib/x86_64-linux-gnu/ld-2.31.so
+server  7479  keg    0u   CHR  136,0      0t0        3 /dev/pts/0
+server  7479  keg    1u   CHR  136,0      0t0        3 /dev/pts/0
+server  7479  keg    2u   CHR  136,0      0t0        3 /dev/pts/0
+server  7479  keg    3u  IPv4 100800      0t0      TCP *:9180 (LISTEN)
+
