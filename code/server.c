@@ -11,11 +11,11 @@
 void error_handling(char *message);
 const char* PORT = "9180";
 int main() {
-	int server_sock;
-	int client_sock;
-	char message[BUFFER_SIZE];
-	int str_len;
-	int client_addr_size;
+	int server_sock = 0;
+	int client_sock - 0;
+	char message[BUFFER_SIZE] = "";
+	int str_len = 0;
+	int client_addr_size = 0;
 
 	/*	
 		struct sockaddr_in{

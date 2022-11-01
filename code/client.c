@@ -13,11 +13,11 @@ const char* PORT = "9180";
 void error_handling(char *message);
 
 int main() {
-    char ipaddr[15];
-    int sock;
+    char ipaddr[15] = "";
+    int sock = 0;
     struct sockaddr_in server_addr;
-    char message[BUFFER_SIZE];
-    int str_len;
+    char message[BUFFER_SIZE] = "";
+    int str_len = 0;
     
 
     printf("IP 주소를 입력하세요 : ");
