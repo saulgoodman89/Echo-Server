@@ -62,7 +62,7 @@ int main() {
         */  
         fgets(message, BUFFER_SIZE, stdin);
 
-        if(!strcmp(message, "q\n")) // strcmp : 두 개의 문자열을 비교하여 문자열이 같다면 0을 리턴 , 다르면 이외의 값 
+        if(!strcmp(message, "q\n") && !strcmp(message,"^C")) // strcmp : 두 개의 문자열을 비교하여 문자열이 같다면 0을 리턴 , 다르면 이외의 값 
                 break;
 
         write(sock, message, strlen(message));
