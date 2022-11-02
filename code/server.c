@@ -5,17 +5,18 @@
 #include <arpa/inet.h>
 #include <sys/types.h>
 #include <sys/socket.h>
+#include <pthread.h>
 
 #define BUFFER_SIZE 1024
 
+void *conn_handler(void *);
 void error_handling(char *message);
 const char* PORT = "9180";
 int main() {
 	int server_sock = 0;
-	int client_sock - 0;
-	char message[BUFFER_SIZE] = "";
-	int str_len = 0;
+	int client_sock = 0;
 	int client_addr_size = 0;
+	pthread_t pthread;
 
 	/*	
 		struct sockaddr_in{
@@ -94,17 +95,30 @@ int main() {
 
 	client_addr_size = sizeof(client_addr);		//client 주소 크기 초기화 
 
+
 	
 	/*	연결 요청 수락 
 		int accept(int sockfd, struct sockaddr *restrict addr,socklen_t *restrict addrlen); (소켓의 fd , 서버 주소 정보에 대한 포인터 , 서버주소 정보 포인터가 가르키는 구조체 크기)
 
 	*/
-	client_sock = accept(server_sock, (struct sockaddr*)&client_addr, &client_addr_size);
+	while (1) {
+		
+		client_sock = accept(server_sock, (struct sockaddr*)&client_addr, &client_addr_size);
+		if(client_sock == -1)
+			error_handling("accept() error");
 
-	if(client_sock == -1)
-		error_handling("accept() error");
+		pthread_create(&pthread,NULL,conn_handler , &client_sock);
+	}
 
 
+}
+
+void *conn_handler(void *fd) 
+{
+
+	int str_len = 0;
+	int client_sock = *(int*)fd;	
+	char message[BUFFER_SIZE] = "";
 	/*
 		read : 서버 소켓에서 버퍼 사이즈 만큼 메시지를 읽어온다. 
 		int ssize_t read(int fd, void *buf, size_t count);	(client 소켓의 fd , 읽은 데이터가 저장될 변수 , 버퍼 사이즈)
@@ -119,9 +133,8 @@ int main() {
 
 					*/
                   	write(client_sock, message, str_len); 
-					printf("클라이언트에 전달 받은 메시지 : %s",message);
+			printf("클라이언트에 전달 받은 메시지 : %s",message);
 	}
-
 	close(client_sock);       /* 연결 종료 */
 }
 
