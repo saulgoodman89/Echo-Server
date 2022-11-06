@@ -13,9 +13,11 @@ all : $(TARGET_SERVER) $(TARGET_CLIENT)
 
 server : 
 	$(CC) -c server.c -lpthread
+	$(CC) -o $(TARGET_SERVER) server.c -lpthread
 
 client : 
 	$(CC) -c client.c
+	$(CC) -o ($TARGET_CLIENT) client.c 
 	
 $(TARGET_SERVER) : server.o 
 	$(CC) -o $(TARGET_SERVER) server.c -lpthread
