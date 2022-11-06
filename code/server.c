@@ -8,15 +8,19 @@
 #include <pthread.h>
 
 #define BUFFER_SIZE 1024
+#define BACK_LOG 5
+#define PORT "9180"
 
 void *conn_handler(void *);
 void error_handling(char *message);
-const char* PORT = "9180";
+pthread_t pthread;
+//pthread_t pthread[5];
+int back_log_count = 0;
+
 int main() {
 	int server_sock = 0;
 	int client_sock = 0;
 	int client_addr_size = 0;
-	pthread_t pthread;
 
 	/*	
 		struct sockaddr_in{
@@ -56,6 +60,10 @@ int main() {
 	/*
 		INADDR_ANY : 서버의 IP 주소를 자동으로 찾아 대입해주는 함수 
 		0.0.0.0 으로 대기 중에 있다 클라이언트가 connect로 접속하면 소켓이 바인드 된다. 
+
+		특정 IP를 지정하고자 한다면 
+		inet_addr(ip주소) 추가 
+
 	*/
 	server_addr.sin_addr.s_addr = htonl(INADDR_ANY);
 	
@@ -73,6 +81,9 @@ int main() {
 
 	/*
 		bind : IP / PORT 번호 할당  
+		운영체제에 소켓이 사용자가 지정한 포트를 사용한다고 알리는 것. 
+		bind 에러가 발생한다 -> 현재 지정된 포티가 사용되고 있다. 
+		 
 		성공시 0 , 실패시 -1 리턴 
 		int bind (int __fd, __CONST_SOCKADDR_ARG __addr, socklen_t __len) (소켓의 파일 디스크립터 , 주소 정보 할당 , __addr 구조체의 크기)
 
@@ -84,17 +95,22 @@ int main() {
 
 	/*
 		listen : 클라이언트가 접속 요청을 기다리도록 설정 
+		요청이 수신되거나 에러가 발생되는 경우 l
 		int listen(int sock , int backlog)
 		sock : 서버 소켓 
 		backlog : 연결 대기 제한 수 
 	*/
-	if(listen(server_sock, 5) == -1)  /* 연결 요청 대기 상태로 진입 */
+	if(listen(server_sock, BACK_LOG) == -1)  /* 연결 요청 대기 상태로 진입 */
 			error_handling("listen() error");
-	else 
+	else  {
 			puts("서버 동작 중 . . . . .  ");
+		//	++back_log_count;
+	}
+
 
 	client_addr_size = sizeof(client_addr);		//client 주소 크기 초기화 
-
+	
+	printf("backlog count : %d \n",back_log_count);
 
 	
 	/*	연결 요청 수락 
@@ -102,20 +118,22 @@ int main() {
 
 	*/
 	while (1) {
-		
 		client_sock = accept(server_sock, (struct sockaddr*)&client_addr, &client_addr_size);
+		
 		if(client_sock == -1)
 			error_handling("accept() error");
 
+	//	if(BACK_LOG > back_log_count) 
 		pthread_create(&pthread,NULL,conn_handler , &client_sock);
 	}
+
+	//fputs(back_log_count,stdout);
 
 
 }
 
 void *conn_handler(void *fd) 
 {
-
 	int str_len = 0;
 	int client_sock = *(int*)fd;	
 	char message[BUFFER_SIZE] = "";
@@ -124,6 +142,7 @@ void *conn_handler(void *fd)
 		int ssize_t read(int fd, void *buf, size_t count);	(client 소켓의 fd , 읽은 데이터가 저장될 변수 , 버퍼 사이즈)
 
 	*/
+	
 	while((str_len = read(client_sock, message, BUFFER_SIZE))!= 0) {
 
 					/*
@@ -132,10 +151,12 @@ void *conn_handler(void *fd)
 						ssize_t : signed int 
 
 					*/
-                  	write(client_sock, message, str_len); 
+			write(client_sock, message, str_len); 
 			printf("클라이언트에 전달 받은 메시지 : %s",message);
 	}
 	close(client_sock);       /* 연결 종료 */
+	pthread_join(pthread,0);
+//	--back_log_count;
 }
 
 void error_handling(char *message)

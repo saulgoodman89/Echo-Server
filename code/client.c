@@ -62,7 +62,12 @@ int main() {
         */  
         fgets(message, BUFFER_SIZE, stdin);
 
-        if(!strcmp(message, "q\n") && !strcmp(message,"^C")) // strcmp : 두 개의 문자열을 비교하여 문자열이 같다면 0을 리턴 , 다르면 이외의 값 
+
+        /*
+            실행파일로 테스트 했을 때는 정상동작 하지만 
+            telnet으로 접속 했을 때 q  , ^C를 입력해도 종료되지 않음. 
+        */
+        if(!strcmp(message, "q\n") || !strcmp(message,"^C")) // strcmp : 두 개의 문자열을 비교하여 문자열이 같다면 0을 리턴 , 다르면 이외의 값 
                 break;
 
         write(sock, message, strlen(message));
