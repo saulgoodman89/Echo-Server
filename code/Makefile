@@ -1,5 +1,3 @@
-CC = gcc
-
 OBJS = server.o client.o
 
 #실행 파일 이름 
@@ -9,12 +7,17 @@ TARGET_CLIENT = Client
 #SUFFIXES : 
 .SUFFIXES : .c .o
 
+.PHONY: clean , client
+
 all : $(TARGET_SERVER) $(TARGET_CLIENT)
 
 server : 
 	$(CC) -c server.c -lpthread
 	$(CC) -o $(TARGET_SERVER) server.c -lpthread
-
+#	echo $@  $@ : 현재 Target의 이름
+#echo $<
+#	echo $*
+	echo $^
 client : 
 	$(CC) -c client.c
 	$(CC) -o ($TARGET_CLIENT) client.c 
