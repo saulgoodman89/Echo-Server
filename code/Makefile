@@ -7,26 +7,26 @@ TARGET_CLIENT = Client
 #SUFFIXES : 
 .SUFFIXES : .c .o
 
-.PHONY: clean , client
+.PHONY: clean , client , server
 
-all : $(TARGET_SERVER) $(TARGET_CLIENT)
+
+all : 
+	$(TARGET_SERVER) $(TARGET_CLIENT)
 
 server : 
 	$(CC) -c server.c -lpthread
-	$(CC) -o $(TARGET_SERVER) server.c -lpthread
+	$(CC) -o $@ server.c -lpthread
 #	echo $@  $@ : 현재 Target의 이름
-#echo $<
-#	echo $*
-	echo $^
+
 client : 
 	$(CC) -c client.c
-	$(CC) -o ($TARGET_CLIENT) client.c 
+	$(CC) -o $@ client.c 
 	
 $(TARGET_SERVER) : server.o 
-	$(CC) -o $(TARGET_SERVER) server.c -lpthread
+	$(CC) -o $@ server.c -lpthread
 
 $(TARGET_CLIENT) : client.o
-	$(CC) -o $(TARGET_CLIENT) client.c
+	$(CC) -o $@ client.c
 
 
 clean_server :
