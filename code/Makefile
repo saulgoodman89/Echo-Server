@@ -1,4 +1,4 @@
-OBJS = server.o client.o
+OBJS = %.o
 
 #실행 파일 이름 
 TARGET_SERVER = Server
@@ -7,11 +7,10 @@ TARGET_CLIENT = Client
 #SUFFIXES : 
 .SUFFIXES : .c .o
 
-.PHONY: clean , client , server
+.PHONY: clean 
 
 
-all : 
-	$(TARGET_SERVER) $(TARGET_CLIENT)
+all : $(TARGET_SERVER) $(TARGET_CLIENT)
 
 server : 
 	$(CC) -c server.c -lpthread
@@ -23,7 +22,7 @@ client :
 	$(CC) -o $@ client.c 
 	
 $(TARGET_SERVER) : server.o 
-	$(CC) -o $@ server.c -lpthread
+	$(CC) -o $(TARGET_SERVER) server.c -lpthread
 
 $(TARGET_CLIENT) : client.o
 	$(CC) -o $@ client.c
