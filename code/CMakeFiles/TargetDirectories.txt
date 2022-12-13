@@ -1,0 +1,4 @@
+/home/keg/KEG/Echo-Server/code/CMakeFiles/rebuild_cache.dir
+/home/keg/KEG/Echo-Server/code/CMakeFiles/edit_cache.dir
+/home/keg/KEG/Echo-Server/code/CMakeFiles/Client.dir
+/home/keg/KEG/Echo-Server/code/CMakeFiles/Server.dir
