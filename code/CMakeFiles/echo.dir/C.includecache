@@ -24,3 +24,21 @@ sys/socket.h
 ctype.h
 -
 
+/home/keg/dev/Echo-Server/code/server.c
+stdio.h
+-
+stdlib.h
+-
+string.h
+-
+unistd.h
+-
+arpa/inet.h
+-
+sys/types.h
+-
+sys/socket.h
+-
+pthread.h
+-
+

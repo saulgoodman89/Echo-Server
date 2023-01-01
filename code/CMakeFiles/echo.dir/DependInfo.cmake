@@ -4,7 +4,8 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
-  "/home/keg/dev/Echo-Server/code/server.c" "/home/keg/dev/Echo-Server/code/CMakeFiles/Server.dir/server.c.o"
+  "/home/keg/dev/Echo-Server/code/client.c" "/home/keg/dev/Echo-Server/code/CMakeFiles/echo.dir/client.c.o"
+  "/home/keg/dev/Echo-Server/code/server.c" "/home/keg/dev/Echo-Server/code/CMakeFiles/echo.dir/server.c.o"
   )
 set(CMAKE_C_COMPILER_ID "GNU")
 

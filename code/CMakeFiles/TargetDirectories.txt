@@ -1,4 +1,10 @@
-/home/keg/KEG/Echo-Server/code/CMakeFiles/rebuild_cache.dir
-/home/keg/KEG/Echo-Server/code/CMakeFiles/edit_cache.dir
-/home/keg/KEG/Echo-Server/code/CMakeFiles/Client.dir
-/home/keg/KEG/Echo-Server/code/CMakeFiles/Server.dir
+/home/keg/dev/Echo-Server/code/CMakeFiles/install.dir
+/home/keg/dev/Echo-Server/code/CMakeFiles/list_install_components.dir
+/home/keg/dev/Echo-Server/code/CMakeFiles/rebuild_cache.dir
+/home/keg/dev/Echo-Server/code/CMakeFiles/edit_cache.dir
+/home/keg/dev/Echo-Server/code/CMakeFiles/install/local.dir
+/home/keg/dev/Echo-Server/code/CMakeFiles/server.dir
+/home/keg/dev/Echo-Server/code/CMakeFiles/install/strip.dir
+/home/keg/dev/Echo-Server/code/CMakeFiles/echo.dir
+/home/keg/dev/Echo-Server/code/CMakeFiles/Client.dir
+/home/keg/dev/Echo-Server/code/CMakeFiles/Server.dir

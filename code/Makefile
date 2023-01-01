@@ -48,13 +48,35 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/keg/KEG/Echo-Server/code
+CMAKE_SOURCE_DIR = /home/keg/dev/Echo-Server/code
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/keg/KEG/Echo-Server/code
+CMAKE_BINARY_DIR = /home/keg/dev/Echo-Server/code
 
 #=============================================================================
 # Targets provided globally by CMake.
+
+# Special rule for the target install
+install: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
+	/usr/bin/cmake -P cmake_install.cmake
+.PHONY : install
+
+# Special rule for the target install
+install/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
+	/usr/bin/cmake -P cmake_install.cmake
+.PHONY : install/fast
+
+# Special rule for the target list_install_components
+list_install_components:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Available install components are: \"Unspecified\""
+.PHONY : list_install_components
+
+# Special rule for the target list_install_components
+list_install_components/fast: list_install_components
+
+.PHONY : list_install_components/fast
 
 # Special rule for the target rebuild_cache
 rebuild_cache:
@@ -78,11 +100,35 @@ edit_cache/fast: edit_cache
 
 .PHONY : edit_cache/fast
 
+# Special rule for the target install/local
+install/local: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
+	/usr/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+.PHONY : install/local
+
+# Special rule for the target install/local
+install/local/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
+	/usr/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+.PHONY : install/local/fast
+
+# Special rule for the target install/strip
+install/strip: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
+	/usr/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
+.PHONY : install/strip
+
+# Special rule for the target install/strip
+install/strip/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
+	/usr/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
+.PHONY : install/strip/fast
+
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/keg/KEG/Echo-Server/code/CMakeFiles /home/keg/KEG/Echo-Server/code/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/keg/dev/Echo-Server/code/CMakeFiles /home/keg/dev/Echo-Server/code/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/keg/KEG/Echo-Server/code/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/keg/dev/Echo-Server/code/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -109,6 +155,32 @@ preinstall/fast:
 depend:
 	$(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
+
+#=============================================================================
+# Target rules for targets named server
+
+# Build rule for target.
+server: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 server
+.PHONY : server
+
+# fast build rule for target.
+server/fast:
+	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/build
+.PHONY : server/fast
+
+#=============================================================================
+# Target rules for targets named echo
+
+# Build rule for target.
+echo: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 echo
+.PHONY : echo
+
+# fast build rule for target.
+echo/fast:
+	$(MAKE) -f CMakeFiles/echo.dir/build.make CMakeFiles/echo.dir/build
+.PHONY : echo/fast
 
 #=============================================================================
 # Target rules for targets named Client
@@ -142,6 +214,7 @@ client.o: client.c.o
 
 # target to build an object file
 client.c.o:
+	$(MAKE) -f CMakeFiles/echo.dir/build.make CMakeFiles/echo.dir/client.c.o
 	$(MAKE) -f CMakeFiles/Client.dir/build.make CMakeFiles/Client.dir/client.c.o
 .PHONY : client.c.o
 
@@ -151,6 +224,7 @@ client.i: client.c.i
 
 # target to preprocess a source file
 client.c.i:
+	$(MAKE) -f CMakeFiles/echo.dir/build.make CMakeFiles/echo.dir/client.c.i
 	$(MAKE) -f CMakeFiles/Client.dir/build.make CMakeFiles/Client.dir/client.c.i
 .PHONY : client.c.i
 
@@ -160,6 +234,7 @@ client.s: client.c.s
 
 # target to generate assembly for a file
 client.c.s:
+	$(MAKE) -f CMakeFiles/echo.dir/build.make CMakeFiles/echo.dir/client.c.s
 	$(MAKE) -f CMakeFiles/Client.dir/build.make CMakeFiles/Client.dir/client.c.s
 .PHONY : client.c.s
 
@@ -169,6 +244,7 @@ server.o: server.c.o
 
 # target to build an object file
 server.c.o:
+	$(MAKE) -f CMakeFiles/echo.dir/build.make CMakeFiles/echo.dir/server.c.o
 	$(MAKE) -f CMakeFiles/Server.dir/build.make CMakeFiles/Server.dir/server.c.o
 .PHONY : server.c.o
 
@@ -178,6 +254,7 @@ server.i: server.c.i
 
 # target to preprocess a source file
 server.c.i:
+	$(MAKE) -f CMakeFiles/echo.dir/build.make CMakeFiles/echo.dir/server.c.i
 	$(MAKE) -f CMakeFiles/Server.dir/build.make CMakeFiles/Server.dir/server.c.i
 .PHONY : server.c.i
 
@@ -187,6 +264,7 @@ server.s: server.c.s
 
 # target to generate assembly for a file
 server.c.s:
+	$(MAKE) -f CMakeFiles/echo.dir/build.make CMakeFiles/echo.dir/server.c.s
 	$(MAKE) -f CMakeFiles/Server.dir/build.make CMakeFiles/Server.dir/server.c.s
 .PHONY : server.c.s
 
@@ -196,8 +274,14 @@ help:
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
+	@echo "... install"
+	@echo "... list_install_components"
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
+	@echo "... install/local"
+	@echo "... server"
+	@echo "... install/strip"
+	@echo "... echo"
 	@echo "... Client"
 	@echo "... Server"
 	@echo "... client.o"

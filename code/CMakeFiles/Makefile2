@@ -44,15 +44,16 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/keg/KEG/Echo-Server/code
+CMAKE_SOURCE_DIR = /home/keg/dev/Echo-Server/code
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/keg/KEG/Echo-Server/code
+CMAKE_BINARY_DIR = /home/keg/dev/Echo-Server/code
 
 #=============================================================================
 # Directory level rules for the build root directory
 
 # The main recursive "all" target.
+all: CMakeFiles/echo.dir/all
 all: CMakeFiles/Client.dir/all
 all: CMakeFiles/Server.dir/all
 
@@ -64,10 +65,66 @@ preinstall:
 .PHONY : preinstall
 
 # The main recursive "clean" target.
+clean: CMakeFiles/server.dir/clean
+clean: CMakeFiles/echo.dir/clean
 clean: CMakeFiles/Client.dir/clean
 clean: CMakeFiles/Server.dir/clean
 
 .PHONY : clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/server.dir
+
+# All Build rule for target.
+CMakeFiles/server.dir/all: CMakeFiles/Server.dir/all
+	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/depend
+	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/keg/dev/Echo-Server/code/CMakeFiles --progress-num=8 "Built target server"
+.PHONY : CMakeFiles/server.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/server.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/keg/dev/Echo-Server/code/CMakeFiles 3
+	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/server.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/keg/dev/Echo-Server/code/CMakeFiles 0
+.PHONY : CMakeFiles/server.dir/rule
+
+# Convenience name for target.
+server: CMakeFiles/server.dir/rule
+
+.PHONY : server
+
+# clean rule for target.
+CMakeFiles/server.dir/clean:
+	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/clean
+.PHONY : CMakeFiles/server.dir/clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/echo.dir
+
+# All Build rule for target.
+CMakeFiles/echo.dir/all:
+	$(MAKE) -f CMakeFiles/echo.dir/build.make CMakeFiles/echo.dir/depend
+	$(MAKE) -f CMakeFiles/echo.dir/build.make CMakeFiles/echo.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/keg/dev/Echo-Server/code/CMakeFiles --progress-num=5,6,7 "Built target echo"
+.PHONY : CMakeFiles/echo.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/echo.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/keg/dev/Echo-Server/code/CMakeFiles 3
+	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/echo.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/keg/dev/Echo-Server/code/CMakeFiles 0
+.PHONY : CMakeFiles/echo.dir/rule
+
+# Convenience name for target.
+echo: CMakeFiles/echo.dir/rule
+
+.PHONY : echo
+
+# clean rule for target.
+CMakeFiles/echo.dir/clean:
+	$(MAKE) -f CMakeFiles/echo.dir/build.make CMakeFiles/echo.dir/clean
+.PHONY : CMakeFiles/echo.dir/clean
 
 #=============================================================================
 # Target rules for target CMakeFiles/Client.dir
@@ -76,14 +133,14 @@ clean: CMakeFiles/Server.dir/clean
 CMakeFiles/Client.dir/all:
 	$(MAKE) -f CMakeFiles/Client.dir/build.make CMakeFiles/Client.dir/depend
 	$(MAKE) -f CMakeFiles/Client.dir/build.make CMakeFiles/Client.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/keg/KEG/Echo-Server/code/CMakeFiles --progress-num=1,2 "Built target Client"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/keg/dev/Echo-Server/code/CMakeFiles --progress-num=1,2 "Built target Client"
 .PHONY : CMakeFiles/Client.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/Client.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/keg/KEG/Echo-Server/code/CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/keg/dev/Echo-Server/code/CMakeFiles 2
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/Client.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/keg/KEG/Echo-Server/code/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/keg/dev/Echo-Server/code/CMakeFiles 0
 .PHONY : CMakeFiles/Client.dir/rule
 
 # Convenience name for target.
@@ -103,14 +160,14 @@ CMakeFiles/Client.dir/clean:
 CMakeFiles/Server.dir/all:
 	$(MAKE) -f CMakeFiles/Server.dir/build.make CMakeFiles/Server.dir/depend
 	$(MAKE) -f CMakeFiles/Server.dir/build.make CMakeFiles/Server.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/keg/KEG/Echo-Server/code/CMakeFiles --progress-num=3,4 "Built target Server"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/keg/dev/Echo-Server/code/CMakeFiles --progress-num=3,4 "Built target Server"
 .PHONY : CMakeFiles/Server.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/Server.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/keg/KEG/Echo-Server/code/CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/keg/dev/Echo-Server/code/CMakeFiles 2
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/Server.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/keg/KEG/Echo-Server/code/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/keg/dev/Echo-Server/code/CMakeFiles 0
 .PHONY : CMakeFiles/Server.dir/rule
 
 # Convenience name for target.
