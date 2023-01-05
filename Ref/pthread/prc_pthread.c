@@ -33,6 +33,7 @@ int main() {
         void **retval : pthread_create에서 start_routine의 리턴 값 저장 
 
     */
+
     int joinNum = pthread_join(threadID, NULL);
     printf("pthread_join Num : %d ",joinNum);
     return 0;
